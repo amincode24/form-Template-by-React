@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  background: url('assets/nightSky.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  color: white;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: white;
+  margin: 0 3rem;
+}
