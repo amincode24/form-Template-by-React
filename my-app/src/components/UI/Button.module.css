@@ -1,0 +1,12 @@
+.button {
+    width: 100%;
+    max-width: 20rem;
+    padding: 10px;
+    margin: 0.5rem;
+    cursor: pointer;
+    border: none;
+    outline: 3px solid;
+    outline-offset: 2px;
+    border-radius: 25px;
+    transition: 0.3s;
+}

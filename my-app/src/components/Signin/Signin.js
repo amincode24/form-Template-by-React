@@ -1,77 +1,48 @@
-import React, { useReducer, useState } from "react";
+import React from "react";
 import Modal from "../UI/Modal";
 import classes from "./Signin.module.css";
 import Button from "../UI/Button";
-const usernameReducer = (state, action) => {
-  if (action.type === "User_Input") {
-    return { value: action.val, isValid: action.val.trim().length > 6 };
-  }
-  if (action.type === "Input_Blur") {
-    return { value: state.value, isValid: state.value.trim().length > 6 };
-  }
-};
-
-const emailReducer = (state, action) => {
-  if (action.type === "User_Input") {
-    return { value: action.val, isValid: action.val.includes("@") };
-  }
-  if (action.type === "Input_Blur") {
-    return { value: state.value, isValid: state.value.includes("@") };
-  }
-};
-
-const passwordReducer = (state, action) => {
-  if (action.type === "User_Input") {
-    return { value: action.val, isValid: action.val.trim().length > 8 };
-  }
-  if (action.type === "Input_Blur") {
-    return { value: state.value, isValid: state.value.trim().length > 8 };
-  }
-};
+import useInput from "../../hook/use-input";
+const usernameInput = (value) => value.trim().length > 6;
+const passwordInput = (value) => value.trim().length > 8;
+const emailInput = (value) => value.includes("@");
 const Signin = (props) => {
-  const [formIsValid, setFromIsValid] = useState(false);
-  const [usernameState, dispatchUsername] = useReducer(usernameReducer, {
-    value: "",
-    isValid: null,
-  });
+  const {
+    value: enteredUserame,
+    isValid: enteredUsernameIsValid,
+    hasError: usernameHasError,
+    valueChangeHandler: usernameChangeHandler,
+    inputBlurHandler: usernameBlurHandler,
+    reset: resetUsername,
+  } = useInput(usernameInput);
 
-  const [emailState, dispatchEmail] = useReducer(emailReducer, {
-    value: "",
-    isValid: null,
-  });
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPassword,
+  } = useInput(passwordInput);
 
-  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-    value: "",
-    isValid: null,
-  });
-  const usernameChangeHandler = (event) => {
-    dispatchUsername({ type: "User_Input", val: event.target.value });
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmail,
+  } = useInput(emailInput);
+  let formIsValid = false;
+  if (enteredUsernameIsValid && enteredPasswordIsValid && enteredEmailIsValid) {
+    formIsValid = true;
+  }
 
-    setFromIsValid(event.target.value.trim().length > 8);
-  };
-
-  const emailChangeHandler = (event) => {
-    dispatchEmail({ type: "User_Input", val: event.target.value });
-    setFromIsValid(event.target.value.includes("@"));
-  };
-
-  const passwordChangeHandler = (event) => {
-    dispatchPassword({ type: "User_Input", val: event.target.value });
-    setFromIsValid(event.target.value.trim().length > 8);
-  };
-  const validateUsernameHandler = () => {
-    dispatchUsername({ type: "Input_Blur" });
-  };
-
-  const validateEmailHandler = () => {
-    dispatchEmail({ type: "Input_Blur" });
-  };
-
-  const validatePasswordHandler = () => {
-    dispatchPassword({ type: "Input_Blur" });
-  };
-  const submitHandler = (event) => {
+  const formSubmitHandler = (event) => {
     event.preventDefault();
+    resetUsername();
+    resetPassword();
+    resetEmail();
   };
   return (
     <Modal>
@@ -79,57 +50,53 @@ const Signin = (props) => {
         <header>
           <h1>Sign in</h1>
         </header>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={formSubmitHandler}>
           <div className={classes.nameinput}>
             <input type="text" placeholder="First Name" />
             <input type="text" placeholder="Last Name" />
           </div>
           <div
             className={`${classes.controls} ${
-              usernameState.isValid === false ? classes.invalid : ""
+              usernameHasError ? classes.invalid : ""
             }`}
           >
             <input
               type="text"
-              value={usernameState.value}
-              onBlur={validateUsernameHandler}
+              value={enteredUserame}
+              onBlur={usernameBlurHandler}
               onChange={usernameChangeHandler}
               placeholder="Userame"
             />
           </div>
           <div
             className={`${classes.controls} ${
-              emailState.isValid === false ? classes.invalid : ""
+              emailHasError ? classes.invalid : ""
             }`}
           >
             <input
               type="email"
-              value={emailState.value}
-              onBlur={validateEmailHandler}
+              value={enteredEmail}
+              onBlur={emailBlurHandler}
               onChange={emailChangeHandler}
               placeholder="E-Mail"
             />
           </div>
           <div
             className={`${classes.controls} ${
-              passwordState.isValid === false ? classes.invalid : ""
+              passwordHasError ? classes.invalid : ""
             }`}
           >
             <input
               type="password"
-              value={passwordState.value}
-              onBlur={validatePasswordHandler}
+              value={enteredPassword}
+              onBlur={passwordBlurHandler}
               onChange={passwordChangeHandler}
               placeholder="Password"
             />
           </div>
-          <div className={classes.button}>
-            <Button className={classes.signin} disabled={!formIsValid}>
-              SignIN
-            </Button>
-            <Button onClick={props.onCloseModal} className={classes.close}>
-              Close
-            </Button>
+          <div className={classes.actions}>
+            <Button className={classes.button} disabled={!formIsValid}>Sign In</Button>
+            <Button className={classes.button} onClick={props.onCloseModal}>Close</Button>
           </div>
         </form>
       </div>

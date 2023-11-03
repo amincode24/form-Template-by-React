@@ -61,50 +61,48 @@ form {
     border-color: red;
     color: white;
 }
-.button {
+.actions {
     display: flex;
     justify-content: center;
 }
 
-.signin, .close {
-    width: 100%;
-    max-width: 20rem;
-    padding: 10px;
-    margin: 0.5rem;
-    cursor: pointer;
-    border: none;
-    outline: 3px solid;
-    outline-offset: 2px;
-    border-radius: 25px;
-    transition: 0.3s;
-}
-
-.signin {
+.button:nth-child(1) {
     background: #FF008B;
     outline-color: #FF008B;
     color: white;
 }
 
-.signin:disabled {
-    cursor: not-allowed;
-}
-
-.signin:hover {
+.button:nth-child(1):hover {
     outline-offset: 6px;
     background: #ff55b3;
     outline-color: #ff55b3;
 }
 
-.close {
+.button:nth-child(2) {
     background-color: transparent;
     color: white;
     outline-color: white;
 }
 
-.close:hover {
+.button:nth-child(2):hover {
     background: white;
     outline-offset: 6px;
     color: black;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+    color: #121212;
+    outline-color: #ccc;
+}
+
+.button:disabled:hover {
+    cursor: not-allowed;
+    background-color: #ccc;
+    color: #121212;
+    outline-color: #ccc;
+    outline-offset: 2px;
 }
 
 ::placeholder {
