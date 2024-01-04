@@ -1,84 +1,85 @@
 .container {
-    margin-top: 2.2rem;
+  margin-top: 2.2rem;
 }
 
 .input {
-    margin: 10rem auto;
-    width: 95%;
-    max-width: 35rem;
-    color: white;
-    padding: 1rem 2rem;
+  margin: 10rem auto;
+  width: 95%;
+  max-width: 35rem;
+  color: white;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(3px);
 }
 
 .controls {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .controls label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .controls input {
-    width: 100%;
-    padding: 0.5rem;
-    background-color: #ffffff4e;
-    border-width: 2px;
-    outline: none;
-    border: none;
-    margin: 0.5rem 0;
-    transition: 0.3s;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #ffffff4e;
+  border-width: 2px;
+  outline: none;
+  border: none;
+  margin: 0.5rem 0;
+  transition: 0.3s;
 }
 
 .controls input:focus {
-    background-color: white;
+  background-color: white;
 }
 
 .controls.invalid input {
-    background: #ff008c74;
-    color: white;
+  background: #ff008c74;
+  color: white;
 }
 
 .actions {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .button:nth-child(1) {
-    color: white;
-    background-color: #00225E;
-    outline-color: #00225E;
+  color: white;
+  background-color: #00225e;
+  outline-color: #00225e;
 }
 
 .button:nth-child(1):hover {
-    outline-offset: 6px;
-    background: #00D3D6;
-    outline-color: #00D3D6;
+  outline-offset: 6px;
+  background: #00d3d6;
+  outline-color: #00d3d6;
 }
 
 .button:nth-child(2) {
-    background: #FF008B;
-    outline-color: #FF008B;
-    color: white;
+  background: #ff008b;
+  outline-color: #ff008b;
+  color: white;
 }
 
 .button:nth-child(2):hover {
-    outline-offset: 6px;
-    background: #ff55b3;
-    outline-color: #ff55b3;
+  outline-offset: 6px;
+  background: #ff55b3;
+  outline-color: #ff55b3;
 }
 
 .button:disabled {
-    cursor: not-allowed;
-    background-color: #ccc;
-    color: #121212;
-    outline-color: #ccc;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #121212;
+  outline-color: #ccc;
 }
 
 .button:disabled:hover {
-    cursor: not-allowed;
-    background-color: #ccc;
-    color: #121212;
-    outline-color: #ccc;
-    outline-offset: 2px;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #121212;
+  outline-color: #ccc;
+  outline-offset: 2px;
 }
